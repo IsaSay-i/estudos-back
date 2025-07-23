@@ -21,9 +21,10 @@ for num in lista:
 for i in range(len(lista)):
     for j in range(1, len(lista)-i):
         if lista[j-1] > lista[j]:
-            temp = lista[j-1]
-            lista[j-1] = lista[j]
-            lista[j] = temp
+            # temp = lista[j-1]
+            # lista[j-1] = lista[j]
+            # lista[j] = temp
+            lista[j-1], lista[j] = lista[j], lista[j-1]
 
 print("Lista vazia.") if len(lista)==0 else print()
 for num in lista:
