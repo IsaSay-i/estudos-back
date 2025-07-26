@@ -20,7 +20,7 @@ class Cachorro:
             print(f"{item["nome"]}: AuAu!")
 
 for i in range(2):
-    nome = input(f"Nome do cachorro {i+1}: ")
+    nome = input(f"\nNome do cachorro {i+1}: ")
     idade = input(f"Idade do cachorro {i+1}: ")
     raca = input(f"Raça do cachorro {i+1}: ")
 
