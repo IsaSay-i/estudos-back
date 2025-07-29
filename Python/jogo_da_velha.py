@@ -1,6 +1,4 @@
 import os
-
-from numpy import fix
 os.system("clear" if os.name=="posix" else "cls")
     
 class Jogo:
@@ -28,10 +26,26 @@ class Jogo:
                 else:
                     print(casa, end=" ")
         print()
+        
+    @classmethod
+    def validar_colbar(cls, colbar):
+        cls.colbar = colbar
+        if colbar < 1 or colbar > 3:
+            print("O número precisa ser de 1 a 3")
+            return False
+        else: return True
+        
+    @classmethod
+    def validar_casa(cls, col, bar):
+        cls.col = col
+        cls.bar = bar
+        if cls.tabuleiro[col][bar] in ["x", "o"]:
+            print("Esta casa não pode ser marcada.")
+            return False
+        else: return True
             
     @classmethod
-    def verificar(cls):
-        
+    def pontuar(cls):
         for jogador in cls.jogadores:
             def encerrar():
                 print(f"\nJogador {jogador["numero"]}({jogador["simbolo"]}) Venceu!")
@@ -57,20 +71,30 @@ class Jogo:
             
     @classmethod
     def iniciar(cls):
+        os.system("clear" if os.name=="posix" else "cls")
         print("JOGO DA VELHA")
         for jogador in cls.jogadores:
             print(f"Jogador {jogador["numero"]}: {jogador["simbolo"]}")
             
-        while cls.fim == False:
+        while not cls.fim:
             for jogador in cls.jogadores:
                 Jogo.mostrar_tabuleiro()
                             
-                col = int(input(f"\nJogador {jogador["numero"]}({jogador["simbolo"]}): Insira a coluna onde deseja marcar\n: "))
-                bar = int(input(f"Jogador {jogador["numero"]}({jogador["simbolo"]}): Insira a barra onde deseja marcar\n: "))
+                while True:
+                    col = int(input(f"\nJogador {jogador["numero"]}({jogador["simbolo"]}): Insira a coluna onde deseja marcar\n: "))
+                    while not Jogo.validar_colbar(col): col = int(input(f"\nJogador {jogador["numero"]}({jogador["simbolo"]}): Insira a coluna onde deseja marcar\n: "))
+
+                    bar = int(input(f"Jogador {jogador["numero"]}({jogador["simbolo"]}): Insira a barra onde deseja marcar\n: "))
+                    while not Jogo.validar_colbar(bar): bar = int(input(f"Jogador {jogador["numero"]}({jogador["simbolo"]}): Insira a barra onde deseja marcar\n: "))
+                    if Jogo.validar_casa(col, bar): break
+              
                 cls.tabuleiro[bar][col] = jogador["simbolo"]
-                
-                Jogo.verificar()
-                if cls.fim == True: break
-        
-Jogo("x")
+                Jogo.pontuar()
+                if cls.fim: break
+
+while True:  
+    escolha = input("Escolha 'x' ou 'o': ").lower()
+    if escolha not in ["x", "o"]: print("Você precisa escolher 'x' ou 'o'\n")
+    else: break
+Jogo(escolha)
 Jogo.iniciar()
