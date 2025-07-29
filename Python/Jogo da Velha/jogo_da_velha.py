@@ -4,6 +4,7 @@ os.system("clear" if os.name=="posix" else "cls")
 class Jogo:
     jogadores = []
     fim = False
+    casas_vazias = 9
     tabuleiro = [
         [" ","  1  "," 2  "," 3"],
         [1, " ", " ", " "],
@@ -45,12 +46,12 @@ class Jogo:
         else: return True
             
     @classmethod
-    def pontuar(cls):
+    def identificar(cls):
         for jogador in cls.jogadores:
             def encerrar():
                 print(f"\nJogador {jogador["numero"]}({jogador["simbolo"]}) Venceu!")
                 cls.fim = True
-                
+
             # Checando barra
             for i, barra in enumerate(cls.tabuleiro):
                 if barra == [i, jogador["simbolo"], jogador["simbolo"], jogador["simbolo"]]:
@@ -78,8 +79,8 @@ class Jogo:
             
         while not cls.fim:
             for jogador in cls.jogadores:
+                if cls.fim: break
                 Jogo.mostrar_tabuleiro()
-                            
                 while True:
                     col = int(input(f"\nJogador {jogador["numero"]}({jogador["simbolo"]}): Insira a coluna onde deseja marcar\n: "))
                     while not Jogo.validar_colbar(col): col = int(input(f"\nJogador {jogador["numero"]}({jogador["simbolo"]}): Insira a coluna onde deseja marcar\n: "))
@@ -87,11 +88,14 @@ class Jogo:
                     bar = int(input(f"Jogador {jogador["numero"]}({jogador["simbolo"]}): Insira a barra onde deseja marcar\n: "))
                     while not Jogo.validar_colbar(bar): bar = int(input(f"Jogador {jogador["numero"]}({jogador["simbolo"]}): Insira a barra onde deseja marcar\n: "))
                     if Jogo.validar_casa(col, bar): break
-              
+                    
                 cls.tabuleiro[bar][col] = jogador["simbolo"]
-                Jogo.pontuar()
-                if cls.fim: break
-
+                cls.casas_vazias = cls.casas_vazias - 1
+                
+                Jogo.identificar()
+                if cls.casas_vazias == 0:
+                    print("oops, EMPATE!")
+                    cls.fim = True
 while True:  
     escolha = input("Escolha 'x' ou 'o': ").lower()
     if escolha not in ["x", "o"]: print("Você precisa escolher 'x' ou 'o'\n")
