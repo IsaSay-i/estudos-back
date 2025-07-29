@@ -39,7 +39,7 @@ class Jogo:
     def validar_casa(cls, col, bar):
         cls.col = col
         cls.bar = bar
-        if cls.tabuleiro[col][bar] in ["x", "o"]:
+        if cls.tabuleiro[bar][col] in ["x", "o"]:
             print("Esta casa não pode ser marcada.")
             return False
         else: return True
