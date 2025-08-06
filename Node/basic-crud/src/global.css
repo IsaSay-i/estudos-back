@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+:root {
+  /* color-scheme: light dark; */
+  background-color: #fff;
+
+  /* font-synthesis: none; */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@theme {
+  --grey: #CACACA;
+  --lg-grey: #E8E8E8;
+  --dk-grey: #282828;
+}
+
+
+
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
