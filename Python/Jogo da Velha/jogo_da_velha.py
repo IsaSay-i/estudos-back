@@ -49,6 +49,7 @@ class Jogo:
     def identificar(cls):
         for jogador in cls.jogadores:
             def encerrar():
+                Jogo.mostrar_tabuleiro()
                 print(f"\nJogador {jogador["numero"]}({jogador["simbolo"]}) Venceu!")
                 cls.fim = True
 
@@ -96,9 +97,11 @@ class Jogo:
                 if cls.casas_vazias == 0:
                     print("oops, EMPATE!")
                     cls.fim = True
-while True:  
-    escolha = input("Escolha 'x' ou 'o': ").lower()
-    if escolha not in ["x", "o"]: print("Você precisa escolher 'x' ou 'o'\n")
-    else: break
-Jogo(escolha)
-Jogo.iniciar()
+                    
+if __name__ == "__main__":
+    while True:  
+        escolha = input("Escolha 'x' ou 'o': ").lower()
+        if escolha not in ["x", "o"]: print("Você precisa escolher 'x' ou 'o'\n")
+        else: break
+    Jogo(escolha)
+    Jogo.iniciar()
