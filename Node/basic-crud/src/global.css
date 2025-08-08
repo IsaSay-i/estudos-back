@@ -8,13 +8,21 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-@theme {
   --grey: #CACACA;
   --lg-grey: #E8E8E8;
   --dk-grey: #282828;
+
+  --icon: #1E1E1E;
 }
+
+.bg-grey-fade{
+  background: linear-gradient(to bottom,#CACACA, #646464);
+}
+
+/* @theme {
+
+} */
 
 
 
